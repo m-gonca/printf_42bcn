@@ -6,7 +6,7 @@
 /*   By: mogonzal <mogonzal@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 20:22:07 by mogonzal          #+#    #+#             */
-/*   Updated: 2022/05/18 17:13:44 by mogonzal         ###   ########.fr       */
+/*   Updated: 2022/05/20 20:10:10 by mogonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,21 @@ int	ft_format(char *ptr, va_list argptr)
 {
 	if (*(ptr + 1) == 'c')
 		return (ft_printchar(va_arg(argptr, int)));
-	if (*(ptr + 1) == 's')
+	else if (*(ptr + 1) == 's')
 		return (ft_printstr(va_arg(argptr, char *)));
-	if (*(ptr + 1) == 'p')
+	else if (*(ptr + 1) == 'p')
 		return (ft_printptr(va_arg(argptr, void *)));
-	if (*(ptr + 1) == 'd' || *(ptr + 1) == 'i' )
+	else if (*(ptr + 1) == 'd' || *(ptr + 1) == 'i' )
 		return (ft_printint(va_arg(argptr, int)));
-	if (*(ptr + 1) == 'u' )
+	else if (*(ptr + 1) == 'u' )
 		return (ft_printunint(va_arg(argptr, unsigned int)));
-	if (*(ptr + 1) == 'x')
+	else if (*(ptr + 1) == 'x')
 		return (ft_printhexa(va_arg(argptr, unsigned int)));
-	if (*(ptr + 1) == 'X' )
+	else if (*(ptr + 1) == 'X' )
 		return (ft_printhexacaps(va_arg(argptr, unsigned int)));
-	if (*(ptr + 1) == '%')
+	else if (*(ptr + 1) == '%')
 		return (ft_printchar('%'));
+	else
+		return (ft_printchar(*(ptr + 1)));
 	return (0);
 }

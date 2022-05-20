@@ -3,14 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mogonzal <mogonzal@student.42.fr>          +#+  +:+       +#+         #
+#    By: mogonzal <mogonzal@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/05 20:03:24 by mogonzal          #+#    #+#              #
-#    Updated: 2022/05/04 18:32:47 by mogonzal         ###   ########.fr        #
+#    Updated: 2022/05/20 20:58:39 by mogonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
+
 HEADER = libft.h
 
 SRCS =	ft_bzero.c \
@@ -62,13 +63,15 @@ OBJS = $(SRCS:.c=.o)
 
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
-CC = gcc
+CC = gcc -c
 
 CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 
-.c.o: ${CC} ${CFLAGS} -I libft.h -c $< -o ${<:.c=.o}
+%.o:%.c $(HEADER)
+	$(CC) $(CFLAGS) -o $@ $<
+	@ECHO "Compiling... $^"
 
 all:	$(NAME)
 

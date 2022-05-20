@@ -6,11 +6,13 @@
 #    By: mogonzal <mogonzal@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 12:28:25 by mogonzal          #+#    #+#              #
-#    Updated: 2022/05/18 19:24:27 by mogonzal         ###   ########.fr        #
+#    Updated: 2022/05/20 20:44:49 by mogonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
+
+HEADER = ft_printf.h
 
 SRCS = 	ft_printf.c \
 		ft_format.c \
@@ -24,17 +26,19 @@ SRCS = 	ft_printf.c \
 
 OBJS = $(SRCS:.c=.o)
 
-CC = gcc
+CC = gcc -c
 
 CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 
-.c.o: ${CC} ${CFLAGS} -I ft_printf.h -c $< -o ${<:.c=.o}
+%.o:%.c $(HEADER)
+	$(CC) $(CFLAGS) -o $@ $<
+	@ECHO "Compiling... $^"
 
 all: $(NAME)
 
-$(NAME):	$(OBJS) ft_printf.h
+$(NAME):	$(OBJS) $(HEADER)
 		$(MAKE) -C ./libft all
 		cp libft/libft.a $(NAME)
 		ar -rcs $(NAME) $(OBJS)
